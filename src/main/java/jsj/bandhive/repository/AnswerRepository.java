@@ -1,13 +1,11 @@
 package jsj.bandhive.repository;
 
-import jsj.bandhive.entity.Site;
+import jsj.bandhive.entity.Answer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface SiteRepository extends JpaRepository<Site, Long> {
+public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
-    List<Site> findAll();
+    Answer save(Answer answer);
 }

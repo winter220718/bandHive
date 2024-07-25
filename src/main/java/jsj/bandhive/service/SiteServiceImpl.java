@@ -1,11 +1,12 @@
 package jsj.bandhive.service;
 
-import jsj.bandhive.entity.Site;
-import jsj.bandhive.repository.SiteRepository;
+import jsj.bandhive.entity.SitePost;
+import jsj.bandhive.entity.SiteRentalList;
+import jsj.bandhive.repository.SitePostRepository;
+import jsj.bandhive.repository.SiteRentalListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,10 +14,18 @@ import java.util.List;
 public class SiteServiceImpl implements SiteService{
 
     @Autowired
-    SiteRepository siteRepository;
+    SitePostRepository sitePostRepository;
+
+    @Autowired
+    SiteRentalListRepository siteRentalListRepository;
 
     @Override
-    public List<Site> getSites() {
-        return siteRepository.findAll();
+    public List<SitePost> getSitePosts() {
+        return sitePostRepository.findAll();
+    }
+
+    @Override
+    public List<SiteRentalList> getSiteRentalList(String postId) {
+        return siteRentalListRepository.findBySitePost_PostId(postId);
     }
 }
