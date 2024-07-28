@@ -3,6 +3,7 @@ package jsj.bandhive.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 @Data
@@ -26,6 +27,7 @@ public class Users {
     @Column(name = "MEMBER_CONTACT")
     private String memberContact;
 
+    @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "JOIN_DATE")
     private LocalDateTime joinDate;
 
@@ -35,9 +37,5 @@ public class Users {
     @Column(name = "JOIN_SITE")
     private char joinSite;
 
-    @PrePersist
-    protected void onCreate() {
-        joinDate = LocalDateTime.now();
-    }
 
 }

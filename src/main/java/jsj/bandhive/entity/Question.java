@@ -2,6 +2,7 @@ package jsj.bandhive.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 
@@ -23,6 +24,7 @@ public class Question {
     @Column(name = "QUESTION_TITLE")
     private String questionTitle;
 
+    @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "QUESTION_DATE")
     private LocalDateTime questionDate;
 
@@ -40,6 +42,5 @@ public class Question {
     @PrePersist
     protected void onCreate() {
         answerYn = 0;
-        questionDate = LocalDateTime.now();;
     }
 }

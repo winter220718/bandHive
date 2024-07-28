@@ -2,29 +2,21 @@ package jsj.bandhive.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name = "ANSWERS")
-public class Answer {
+@Table(name = "FAVORITES")
+public class Favorites {
 
     @Id
-    @Column(name = "ANSWER_ID")
+    @Column(name = "FAV_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "answer_seq")
     @SequenceGenerator(name = "answer_seq", sequenceName = "answer_id_seq", allocationSize = 1)
-    private Long answerId;
-
-    private String answerContent;
-
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    private LocalDateTime answerDate;
+    private Long favId;
 
     @ManyToOne
-    @JoinColumn(name = "QUESTION_ID", referencedColumnName = "QUESTION_ID")
-    private Question question;
+    @JoinColumn(name = "POST_ID", referencedColumnName = "POST_ID")
+    private SitePost sitePost;
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID", referencedColumnName = "MEMBER_ID")

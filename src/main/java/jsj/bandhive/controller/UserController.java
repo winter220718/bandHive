@@ -1,21 +1,24 @@
 package jsj.bandhive.controller;
 
+import jsj.bandhive.entity.Favorites;
 import jsj.bandhive.entity.Users;
+import jsj.bandhive.service.FavoritesServiceImpl;
 import jsj.bandhive.service.UserService;
 import jsj.bandhive.service.UserServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+@Slf4j
 @RestController
 public class UserController {
 
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private FavoritesServiceImpl favoritesService;
 
     @PostMapping("/register")
     public Users registerUser(@RequestBody Users user) {
@@ -34,5 +37,23 @@ public class UserController {
         }
 
 
+    }
+
+    /*
+    * 찜 기능
+    * */
+    @PostMapping("/makeFav/{onOff}")
+    public String makeFav(@RequestBody Favorites favorites, @PathVariable int onOff) {
+
+        if(onOff == 1) {
+            log.info("찜 저장");
+            favoritesService.saveFav(favorites);
+            return "saved in your favorites";
+        } else if (onOff == 0) {
+            log.info("찜 해제");
+            favoritesService.deleteFav(favorites);
+            return "deleted in your favorites";
+        }
+    return "";
     }
 }
