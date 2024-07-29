@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @Table(name = "USERS")
 public class Users {
 
-
     @Id
     @Column(name = "MEMBER_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_gen")

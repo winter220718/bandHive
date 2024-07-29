@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 public class ReviewController {
@@ -37,5 +39,10 @@ public class ReviewController {
         reviewService.deleteReview(reviewId);
 
         return "삭제됨";
+    }
+
+    @PostMapping("/my-review")
+    public List<Review> getReview(@RequestParam Long memberId) {
+        return reviewService.getReview(memberId);
     }
 }

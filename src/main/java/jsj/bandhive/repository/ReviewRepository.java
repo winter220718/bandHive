@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
@@ -14,4 +16,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Transactional
     @Query("UPDATE Review SET reviewContent = :reviewContent WHERE reviewId = :reviewId")
     void updateReviewByReviewId(Long reviewId, String reviewContent);
+
+    List<Review> getReviewByUser_MemberId(Long memberId);
+
 }

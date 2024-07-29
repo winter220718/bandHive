@@ -2,6 +2,8 @@ package jsj.bandhive.service;
 
 import jsj.bandhive.entity.Review;
 
+import java.util.List;
+
 public interface ReviewService {
 
     void saveReview(Review review);
@@ -9,5 +11,7 @@ public interface ReviewService {
     void updateReview(Review review);
 
     void deleteReview(Long reviewId);
+
+    List<Review> getReview(Long memberId);
 
 }

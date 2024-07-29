@@ -3,6 +3,7 @@ package jsj.bandhive.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -24,7 +25,7 @@ public class Question {
     @Column(name = "QUESTION_TITLE")
     private String questionTitle;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @CreationTimestamp
     @Column(name = "QUESTION_DATE")
     private LocalDateTime questionDate;
 

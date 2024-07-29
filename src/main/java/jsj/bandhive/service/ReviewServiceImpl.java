@@ -5,6 +5,8 @@ import jsj.bandhive.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReviewServiceImpl implements ReviewService{
     @Autowired
@@ -25,5 +27,10 @@ public class ReviewServiceImpl implements ReviewService{
     public void deleteReview(Long reviewId) {
         reviewRepository.deleteById(reviewId);
 
+    }
+
+    @Override
+    public List<Review> getReview(Long memberId) {
+        return reviewRepository.getReviewByUser_MemberId(memberId);
     }
 }

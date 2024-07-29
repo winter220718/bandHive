@@ -3,6 +3,7 @@ package jsj.bandhive.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
@@ -18,7 +19,7 @@ public class Reservation {
     @SequenceGenerator(name = "rsvt_seq", sequenceName = "rsvt_id_seq", allocationSize = 1)
     private Long rsvtId;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @CreationTimestamp
     @Column(name = "RSVT_APLY_DATE") // 예약을 신청한 날
     private LocalDateTime rsvtAplyDate;
 
