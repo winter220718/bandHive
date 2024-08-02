@@ -1,5 +1,41 @@
 import './App.css';
-import {useState} from "react";
+import React, {useEffect, useState} from "react";
+import axios from 'axios';
+import './components/common/header/CommonHeader'
+import CommonHeader from "./components/common/header/CommonHeader";
+
+
+const Test4 = () => {
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const response = await axios.get('https://jsonplaceholder.typicode.com/photos');
+                setPosts(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchPosts();
+    }, []);
+
+
+    return(
+
+        <ul>
+            {posts.map(post => (
+                <li key={post.id}>
+                    <div>{post.title}</div>
+                    <div><img src={post.thumbnailUrl}/></div>
+                </li>
+            ))}
+        </ul>
+
+    )
+}
+
 
 const RecordForm = ({numList, setNumList}) => {
 
@@ -43,7 +79,7 @@ const Test2 = () => {
 }
 
 
-const App = () => {
+const Test3 = () => {
 
     const [text, setText] = useState("");
     const [edit, setEdit] = useState(false);
@@ -114,4 +150,18 @@ function Test() {
   );
 }
 
-export default App;
+
+
+export default function App() {
+
+    return (
+        <>
+            <CommonHeader />
+        <div className='main'>
+            <div>메인 화면 입니다~</div>
+        </div>
+        </>
+
+    );
+}
+

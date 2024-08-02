@@ -15,12 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class SiteController {
 
     @Autowired
     private  SiteServiceImpl siteService;
 
+    @GetMapping("/main")
+    public String main() {
+
+        return "";
+    }
 
 
     @GetMapping("/getAllSitePosts")
