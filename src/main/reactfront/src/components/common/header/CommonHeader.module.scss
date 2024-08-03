@@ -1,14 +1,15 @@
-@import "../Common.module";
+@import "../Common.css";
 @import url('https://fonts.cdnfonts.com/css/agency-fb');
 
 $POINT_COLOR : #3F4D4C;
+
 .header {
   height: 200px;
+  width:100%;
 }
 
 .headerBox {
   height : 33px;
-  width: 100%;
   background: $POINT_COLOR;
   color : whitesmoke;
   align-content: center;

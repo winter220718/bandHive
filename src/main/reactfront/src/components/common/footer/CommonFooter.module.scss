@@ -1,0 +1,38 @@
+@import "../Common.css";
+
+$POINT_COLOR : #3F4D4C;
+
+.footer {
+  width:65%;
+  height: 200px;
+  //border : 1px solid black;
+  font-size: 20px;
+  position : relative;
+  transform: translateY(0%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.logo{
+  font-size: 30px;
+  color : $POINT_COLOR;
+  margin-bottom: 10px;
+}
+
+.left_container{
+  font-size: 15px;
+  font-weight: lighter;
+  line-height: 170%;
+}
+
+.right_container {
+  display: grid;
+  grid-auto-flow: row; /* 기본 흐름 방향 설정 */
+  gap: 1px; /* span 요소 간의 간격 */
+}
+
+.right_container span:nth-child(2) {
+  font-size: 30px;
+  font-weight: bold;
+}

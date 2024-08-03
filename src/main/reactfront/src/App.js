@@ -1,9 +1,10 @@
-import './App.css';
+import styles from './App.module.scss';
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import './components/common/header/CommonHeader'
 import CommonHeader from "./components/common/header/CommonHeader";
-
+import CommonFooter from "./components/common/footer/CommonFooter";
+import Main from "./components/main/main";
 
 const Test4 = () => {
     const [posts, setPosts] = useState([]);
@@ -22,7 +23,7 @@ const Test4 = () => {
     }, []);
 
 
-    return(
+    return (
 
         <ul>
             {posts.map(post => (
@@ -71,8 +72,8 @@ const Test2 = () => {
     const [numList, setNumList] = useState([]);
 
     return (
-        <div style={{margin: "0 auto", width : "800px", textAlign : "center"}}>
-           <RecordForm numList={numList} setNumList={setNumList}/>
+        <div style={{margin: "0 auto", width: "800px", textAlign: "center"}}>
+            <RecordForm numList={numList} setNumList={setNumList}/>
             <RecordList numList={numList}/>
         </div>
     )
@@ -121,8 +122,9 @@ function Test() {
     // 실행되는 순간 페이지가 다시 랜더링 된다.
     //let [num, setNum] = useState(1);
 
-    const[num, setNum] = useState(0);
-    const[numList, setNumList] = useState([]);
+    const [num, setNum] = useState(0);
+    const [numList, setNumList] = useState([]);
+
     //setTimeout(()=>{setNum(num = num + 1)},1000)
 
     function numRecording() {
@@ -130,36 +132,45 @@ function Test() {
 
         setNum(0);
     }
-  return (
-    <div className="App">
-        <header className="App-header">
-            <div>현재 숫자 : {num}</div>
-            <button onClick={() => {setNum(num + 1)}}>숫자 증가</button>
-            <button onClick={() => {setNum(num - 1)}}>숫자 감소</button>
-            <button onClick={numRecording}>숫자기록</button>
-            <h1>저장된 숫자</h1>
-            <ul>
-                {numList.map((num) => (
-                    <li>{num}</li>
-                ))}
-            </ul>
-        </header>
-    </div>
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <div>현재 숫자 : {num}</div>
+                <button onClick={() => {
+                    setNum(num + 1)
+                }}>숫자 증가
+                </button>
+                <button onClick={() => {
+                    setNum(num - 1)
+                }}>숫자 감소
+                </button>
+                <button onClick={numRecording}>숫자기록</button>
+                <h1>저장된 숫자</h1>
+                <ul>
+                    {numList.map((num) => (
+                        <li>{num}</li>
+                    ))}
+                </ul>
+            </header>
+        </div>
 
 
-  );
+    );
 }
-
 
 
 export default function App() {
 
     return (
         <>
-            <CommonHeader />
-        <div className='main'>
-            <div>메인 화면 입니다~</div>
-        </div>
+            <div className={styles.container}>
+                <CommonHeader className={styles.header}/>
+                <div className={styles.main}>
+                    <Main/>
+                </div>
+                <CommonFooter className={styles.footer}/>
+            </div>
         </>
 
     );
