@@ -2,12 +2,9 @@ package jsj.bandhive.controller;
 
 import jsj.bandhive.entity.Answer;
 import jsj.bandhive.entity.Question;
-import jsj.bandhive.entity.SitePost;
-import jsj.bandhive.entity.Users;
 import jsj.bandhive.service.AnswerServiceImpl;
 import jsj.bandhive.service.QuestionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

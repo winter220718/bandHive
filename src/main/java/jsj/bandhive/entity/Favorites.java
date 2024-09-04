@@ -20,6 +20,6 @@ public class Favorites {
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID", referencedColumnName = "MEMBER_ID")
-    private Users user;
+    private User user;
 
 }

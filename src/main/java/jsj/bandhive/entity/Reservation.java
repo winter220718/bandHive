@@ -2,9 +2,7 @@ package jsj.bandhive.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 
@@ -43,7 +41,7 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID", referencedColumnName = "MEMBER_ID")
-    private Users user;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "SITE_ID", referencedColumnName = "SITE_ID")

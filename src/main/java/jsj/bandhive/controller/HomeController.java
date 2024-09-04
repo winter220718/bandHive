@@ -1,10 +1,7 @@
 package jsj.bandhive.controller;
 
-import jsj.bandhive.entity.Site;
 import jsj.bandhive.entity.SitePost;
 import jsj.bandhive.entity.SiteRentalList;
-import jsj.bandhive.repository.SiteRentalListRepository;
-import jsj.bandhive.service.SiteService;
 import jsj.bandhive.service.SiteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,10 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Controller
-public class SiteController {
+@RestController
+public class HomeController {
 
     @Autowired
     private  SiteServiceImpl siteService;
@@ -24,9 +23,16 @@ public class SiteController {
     @GetMapping("/main")
     public String main() {
 
-        return "";
+        return "hello, react!";
     }
 
+    @GetMapping("/getTopSites")
+    public List<SitePost> getTopSites(Model model) {
+        List<SitePost> allSites = siteService.getSitePosts();
+
+        Collections.shuffle(allSites);
+        return  allSites.stream().limit(6).collect(Collectors.toList());
+    }
 
     @GetMapping("/getAllSitePosts")
     public List<SitePost> getAllSitePosts(Model model) {

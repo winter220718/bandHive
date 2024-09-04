@@ -1,12 +1,11 @@
 package jsj.bandhive.service;
 
-import jsj.bandhive.entity.Users;
-import org.springframework.stereotype.Service;
+import jsj.bandhive.entity.User;
 
 
 public interface UserService {
 
-    Users save(Users user);
+    Long save(User user);
 
     boolean authenticate(String memberEmail, String memberPassword);
 

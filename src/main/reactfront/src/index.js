@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './components/common/Common.css';
-import CommonHeader from './components/common/header/CommonHeader';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -10,7 +9,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <>
-        <App />
+            <link href="https://fonts.googleapis.com" rel="preconnect"/>
+
+            <App/>
         </>
     </React.StrictMode>
 );

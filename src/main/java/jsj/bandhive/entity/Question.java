@@ -2,7 +2,6 @@ package jsj.bandhive.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -34,7 +33,7 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID", referencedColumnName = "MEMBER_ID")
-    private Users user;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "POST_ID", referencedColumnName = "POST_ID")

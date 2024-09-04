@@ -2,12 +2,8 @@ package jsj.bandhive.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.lang.reflect.Member;
 import java.time.LocalDateTime;
 
 @Entity
@@ -33,6 +29,6 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID", referencedColumnName = "MEMBER_ID")
-    private Users user;
+    private User user;
 
 }

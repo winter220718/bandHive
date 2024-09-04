@@ -1,13 +1,13 @@
 package jsj.bandhive.controller;
 
 import jsj.bandhive.entity.Favorites;
-import jsj.bandhive.entity.Users;
+import jsj.bandhive.entity.User;
 import jsj.bandhive.service.FavoritesServiceImpl;
-import jsj.bandhive.service.UserService;
 import jsj.bandhive.service.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 @Slf4j
@@ -20,9 +20,13 @@ public class UserController {
     @Autowired
     private FavoritesServiceImpl favoritesService;
 
-    @PostMapping("/register")
-    public Users registerUser(@RequestBody Users user) {
-        return userService.save(user);
+    /*
+    * 회원가입
+    * */
+    @PostMapping("/singup")
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
+        Long memberId = userService.save(user);
+        return new ResponseEntity<>(memberId, HttpStatus.OK);
     }
 
     @PostMapping("/login")
