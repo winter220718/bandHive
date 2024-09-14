@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from "react";
 import './logIn.css';
 import axios from "axios";
 const { Component } = React;
@@ -7,7 +7,7 @@ const { Component } = React;
 /*
 * 로그인
 * */
-function goToLogIn() {
+function GoToLogIn() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -34,13 +34,6 @@ function goToLogIn() {
 
 }
 
-/*
-* 회원가입
-* */
-function goToSignUp() {
-
-
-}
 // stateless component for the panel prominently featuring the button to enable the slide function
 const ActionPanel = ({ signIn, slide }) => {
     // content to show conditional to the signIn boolean
@@ -86,37 +79,80 @@ const FormPanel = ({ signIn }) => {
     const inputs = [
         {
             type: 'text',
+            id: 'memberEmail',
             placeholder: '이메일 주소'
         },
         {
             type: 'password',
+            id: 'memberPassword',
             placeholder: '비밀번호'
         }
     ];
+
     // if the signIn boolean directs toward the sign up form, include an additional input in the inputs array, for the name
     if (!signIn) {
-        inputs.unshift(
-
-            {
-            type: 'text', placeholder: '이름'
-
-        },
+        inputs.splice(1, 0,
             {
                 type: 'text',
+                id: 'memberContact',
                 placeholder: '휴대폰 번호'
             }
         );
 
+        inputs.push(
+            {
+                type: 'password',
+                id: 'confirmPassword',
+                placeholder: '비밀번호 확인'
+            }
+        )
+
     }
 
-    // link also shared by both versions of the panel
+    // link also shared by both versions of the panel`
     const link = {
         href: '#',
         text: '비밀번호를 잊으셨나요?'
     }
 
+    const [formData, setFormData] = useState({
+        memberEmail: '',
+        memberPassword: '',
+        memberContact: '',
+        joinType: 'B',
+        joinSite: 'B',
+    })
+
+    const handleChange = (e) => {
+        // console.log(e.target);
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    const [responseMessage, setResponseMessage] = useState('');
+
+    const goToSignUp = async (e) => {
+
+        try {
+            const response = await axios.post('/signup', formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.status === 200) {
+                console.log(`회원가입 성공! 사용자 ID: ${response.data}`);
+            }
+        } catch (error) {
+            console.log('회원가입 실패. 다시 시도해 주세요.');
+        }
+    };
     // button to hypothetically sign in/up
     const button = signIn ? '로그인하기' : '가입하기';
+    const goTo = signIn ? GoToLogIn : goToSignUp;
 
     // render the specified content in the matching elements
     return (
@@ -130,11 +166,11 @@ const FormPanel = ({ signIn }) => {
             <p>{paragraph}</p>
             <form>
                 {
-                    inputs.map(({ type, placeholder }) => <input type={type} key={placeholder} placeholder={placeholder} />)
+                    inputs.map(({ type, id, placeholder }) => <input type={type} key={id} name={id} placeholder={placeholder} onChange={handleChange} />)
                 }
             </form>
             <a href={link.href}>{link.text}</a>
-            <button>{button}</button>
+            <button onClick={goTo}>{button}</button>
         </div>
     );
 };

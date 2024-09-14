@@ -4,6 +4,7 @@ package jsj.bandhive.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 @Data
@@ -26,7 +27,7 @@ public class User {
     @Column(name = "MEMBER_CONTACT")
     private String memberContact;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @CreationTimestamp
     @Column(name = "JOIN_DATE")
     private LocalDateTime joinDate;
 

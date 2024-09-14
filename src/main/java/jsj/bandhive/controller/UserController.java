@@ -23,8 +23,9 @@ public class UserController {
     /*
     * 회원가입
     * */
-    @PostMapping("/singup")
+    @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
+        System.out.println("user = " + user);
         Long memberId = userService.save(user);
         return new ResponseEntity<>(memberId, HttpStatus.OK);
     }

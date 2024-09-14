@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Long save(User user) {
         try {
-            if(userRepository.findByMemberEmail(user.getMemberEmail()) == null) {
+            if(userRepository.findByMemberEmail(user.getMemberEmail()) != null) {
                 throw new IllegalArgumentException("이미 가입된 회원입니다.");
             };
         } catch (IllegalArgumentException e) {
