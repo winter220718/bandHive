@@ -1,8 +1,46 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './logIn.css';
+import axios from "axios";
 const { Component } = React;
 
 
+/*
+* 로그인
+* */
+function goToLogIn() {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post('/login', {
+                username,
+                password,
+            });
+
+            // 로그인 성공 시 토큰 저장 (예: 로컬 스토리지)
+            localStorage.setItem('token', response.data.token);
+
+            // 로그인 성공 후 원하는 페이지로 이동
+            alert('Login successful!');
+        } catch (err) {
+            // 에러 처리
+            setError('Invalid credentials');
+        }
+    };
+
+}
+
+/*
+* 회원가입
+* */
+function goToSignUp() {
+
+
+}
 // stateless component for the panel prominently featuring the button to enable the slide function
 const ActionPanel = ({ signIn, slide }) => {
     // content to show conditional to the signIn boolean
