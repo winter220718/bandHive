@@ -32,7 +32,7 @@ public class User {
     private LocalDateTime joinDate;
 
     @Column(name ="JOIN_TYPE")
-    private char joinType;
+    private String joinType;
 
     @Column(name = "JOIN_SITE")
     private char joinSite;

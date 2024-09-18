@@ -3,37 +3,6 @@ import './logIn.css';
 import axios from "axios";
 const { Component } = React;
 
-
-/*
-* 로그인
-* */
-function GoToLogIn() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const response = await axios.post('/login', {
-                username,
-                password,
-            });
-
-            // 로그인 성공 시 토큰 저장 (예: 로컬 스토리지)
-            localStorage.setItem('token', response.data.token);
-
-            // 로그인 성공 후 원하는 페이지로 이동
-            alert('Login successful!');
-        } catch (err) {
-            // 에러 처리
-            setError('Invalid credentials');
-        }
-    };
-
-}
-
 // stateless component for the panel prominently featuring the button to enable the slide function
 const ActionPanel = ({ signIn, slide }) => {
     // content to show conditional to the signIn boolean
@@ -119,7 +88,7 @@ const FormPanel = ({ signIn }) => {
         memberEmail: '',
         memberPassword: '',
         memberContact: '',
-        joinType: 'B',
+        joinType: '',
         joinSite: 'B',
     })
 
@@ -131,8 +100,22 @@ const FormPanel = ({ signIn }) => {
             [name]: value,
         });
     };
+    const goToLogIn = async (e) => {
+        try {
+            const response = await axios.post('/login', formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
 
-    const [responseMessage, setResponseMessage] = useState('');
+            if (response.status === 200) {
+                console.log(`로그인 성공! 사용자 ID: ${response.data.memberEmail}`);
+                // console.log(response.data)
+            }
+        } catch (error) {
+            console.log('존재하지 않는 사용자입니다.');
+        }
+    }
 
     const goToSignUp = async (e) => {
 
@@ -147,12 +130,12 @@ const FormPanel = ({ signIn }) => {
                 console.log(`회원가입 성공! 사용자 ID: ${response.data}`);
             }
         } catch (error) {
-            console.log('회원가입 실패. 다시 시도해 주세요.');
+            console.log('회원가입 실패');
         }
     };
     // button to hypothetically sign in/up
     const button = signIn ? '로그인하기' : '가입하기';
-    const goTo = signIn ? GoToLogIn : goToSignUp;
+    const goTo = signIn ? goToLogIn : goToSignUp;
 
     // render the specified content in the matching elements
     return (

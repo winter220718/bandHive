@@ -1,4 +1,4 @@
-package jsj.bandhive.controller;
+package jsj.bandhive.entity.controller;
 
 import jsj.bandhive.entity.Reservation;
 import jsj.bandhive.service.ReservationServiceImpl;

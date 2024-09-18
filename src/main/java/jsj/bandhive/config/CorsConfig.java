@@ -1,4 +1,4 @@
-package jsj.bandhive;
+package jsj.bandhive.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

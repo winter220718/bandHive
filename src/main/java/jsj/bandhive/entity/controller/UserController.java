@@ -1,9 +1,10 @@
-package jsj.bandhive.controller;
+package jsj.bandhive.entity.controller;
 
 import jsj.bandhive.entity.Favorites;
 import jsj.bandhive.entity.User;
 import jsj.bandhive.service.FavoritesServiceImpl;
 import jsj.bandhive.service.UserServiceImpl;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,34 +15,36 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserController {
 
-    @Autowired
     private UserServiceImpl userService;
 
-    @Autowired
     private FavoritesServiceImpl favoritesService;
+
+
+    public UserController(UserServiceImpl userService, FavoritesServiceImpl favoritesService) {
+        this.userService = userService;
+        this.favoritesService = favoritesService;
+    }
+
 
     /*
     * 회원가입
     * */
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
-        System.out.println("user = " + user);
         Long memberId = userService.save(user);
         return new ResponseEntity<>(memberId, HttpStatus.OK);
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String memberEmail, @RequestParam String memberPassword, Model model) {
-        boolean isAuthenticated = userService.authenticate(memberEmail, memberPassword);
+    public ResponseEntity<?> login(@RequestBody User user, Model model) {
 
+        boolean isAuthenticated = userService.authenticate(user.getMemberEmail(), user.getMemberPassword());
         if(isAuthenticated) {
-            return "redirect:/home";
+            return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
             model.addAttribute("error", "login failed");
-            return "loginFail";
+            return new ResponseEntity<>(user, HttpStatus.NOT_ACCEPTABLE);
         }
-
-
     }
 
     /*

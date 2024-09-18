@@ -1,4 +1,4 @@
-package jsj.bandhive.controller;
+package jsj.bandhive.entity.controller;
 
 import jsj.bandhive.entity.Review;
 import jsj.bandhive.service.ReviewServiceImpl;
