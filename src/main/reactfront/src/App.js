@@ -11,20 +11,30 @@ import './assets/vendor/aos/aos.css'; // AOS CSS
 import './assets/vendor/fontawesome-free/css/all.min.css'; // FontAwesome CSS
 import './assets/vendor/glightbox/css/glightbox.min.css'; // GLightbox CSS
 import './assets/vendor/swiper/swiper-bundle.min.css'; // Swiper CSS
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Post from "./components/post/post";
 
 export default function App() {
 
     return (
         <>
-            <CommonHeader className={styles.header}/>
-            <div className={styles.main}>
-                <Main/>
-            </div>
-            <CommonFooter className={styles.footer}/>
-
-
+            <Router>
+                <div className={styles.mainContainer}>
+                    <div>
+                    <CommonHeader className={styles.header}/>
+                    </div>
+                    <div className={styles.main}>
+                        <Routes>
+                            <Route path="/" element={<Main/>}/>
+                            <Route path="/post" element={<Post/>}/>
+                        </Routes>
+                    </div>
+                    <div>
+                    <CommonFooter className={styles.footer}/>
+                    </div>
+                </div>
+            </Router>
         </>
-
     );
 }
 

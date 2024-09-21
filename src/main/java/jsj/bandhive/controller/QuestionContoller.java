@@ -1,4 +1,4 @@
-package jsj.bandhive.entity.controller;
+package jsj.bandhive.controller;
 
 import jsj.bandhive.entity.Answer;
 import jsj.bandhive.entity.Question;

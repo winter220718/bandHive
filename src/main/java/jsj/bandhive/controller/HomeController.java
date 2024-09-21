@@ -1,4 +1,4 @@
-package jsj.bandhive.entity.controller;
+package jsj.bandhive.controller;
 
 import jsj.bandhive.dto.CustomUserDetails;
 import jsj.bandhive.entity.SitePost;
@@ -25,8 +25,11 @@ import java.util.stream.Collectors;
 @ResponseBody
 public class HomeController {
 
-    @Autowired
     private  SiteServiceImpl siteService;
+
+    public HomeController(SiteServiceImpl siteService) {
+        this.siteService = siteService;
+    }
 
     @GetMapping("/main")
     public String main() {

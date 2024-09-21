@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import 'aos/dist/aos.css'; // AOS 애니메이션 관련 CSS를 포함시킵니다.
 import LogIn from '../../logIn/logIn';
 import Modal from 'react-bootstrap/Modal';
+import {Link} from 'react-router-dom';
 
 function CommonHeader() {
     const [logInModalShow, setLogInModalShow] = React.useState(false);
@@ -38,8 +39,11 @@ function CommonHeader() {
                         {/*<li><a href="about.html">예약하기</a></li>*/}
                         {/*<li><a href="services.html">Services</a></li>*/}
                         {/*<li><a href="pricing.html">Pricing</a></li>*/}
+
+                        <li><Link to="/post">합주실</Link></li>
                         <li className="dropdown">
-                            <a href="#"><span>마이페이지</span> <i className="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <a href="#"><span>마이페이지</span>
+                                <i className="bi bi-chevron-down toggle-dropdown"></i></a>
                             <ul>
                                 <li><a href="#">나의 정보</a></li>
                                 <li><a href="#">예약 내역</a></li>

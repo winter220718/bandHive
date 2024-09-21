@@ -64,11 +64,6 @@ const faqItems = [
         question: '합주실을 새로 차렸는데 등록하고 싶어요',
         answer: '고객센터로 전화 주세요 ^^',
         delay: 400
-    },
-    {
-        question: '링옴 사궈',
-        answer: '이미 사귀고 있다네요',
-        delay: 400
     }
 ];
 
