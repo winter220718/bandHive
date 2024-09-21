@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import 'aos/dist/aos.css'; // AOS 애니메이션 관련 CSS를 포함시킵니다.
 import LogIn from '../../logIn/logIn';
 import Modal from 'react-bootstrap/Modal';
@@ -6,6 +6,24 @@ import Modal from 'react-bootstrap/Modal';
 function CommonHeader() {
     const [logInModalShow, setLogInModalShow] = React.useState(false);
     const handleClose = () => setLogInModalShow(false);
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        setIsLoggedIn(!!token);
+    })
+
+    const logout = () => {
+        localStorage.removeItem('token');
+        setIsLoggedIn(false);
+    }
+
+    const loginSuccess = () => {
+        setIsLoggedIn(true);
+        setLogInModalShow(false);
+    };
+
     return (
         <header id="header" className="header d-flex align-items-center fixed-top">
             <div className="container-fluid container-xl position-relative d-flex align-items-center">
@@ -39,16 +57,23 @@ function CommonHeader() {
 
                             </ul>
                         </li>
-                        <li> <a href="contact.html">회원가입</a></li>
+                        <li><a href="contact.html">회원가입</a></li>
 
                     </ul>
                     <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
                 </nav>
 
-                <a className="btn-getstarted" onClick={(e) => {
-                    e.preventDefault();
-                    setLogInModalShow(true);
-                }}>로그인</a>
+                {isLoggedIn ? (
+                        <a className="btn-getstarted" onClick={logout}>로그아웃</a>
+                    )
+                    :
+                    (
+                        <a className="btn-getstarted" onClick={(e) => {
+                            e.preventDefault();
+                            setLogInModalShow(true);
+                        }}>로그인</a>
+                    )
+                }
 
                 <Modal show={logInModalShow} onHide={handleClose}>
                     <LogIn/>

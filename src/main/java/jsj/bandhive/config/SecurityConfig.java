@@ -54,8 +54,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/login", "/", "/join").permitAll() // 모든 경로 허용
                         .requestMatchers("/admin").hasRole("ADMIN") // admin 권한
-//                        .anyRequest().permitAll());
-                        .anyRequest().authenticated()); // 로그인한 사용자만 접근
+                        .anyRequest().permitAll());
+//                        .anyRequest().authenticated()); // 로그인한 사용자만 접근
 
         http
                 .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);

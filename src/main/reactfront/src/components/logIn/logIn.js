@@ -109,8 +109,13 @@ const FormPanel = ({ signIn }) => {
             });
 
             if (response.status === 200) {
-                console.log(`로그인 성공! 사용자 ID: ${response.data.memberEmail}`);
-                // console.log(response.data)
+                const token = response.headers['authorization'];
+                if(token) {
+                    localStorage.setItem('token', token);
+                }
+
+                console.log('로그인 성공');
+
             }
         } catch (error) {
             console.log('존재하지 않는 사용자입니다.');

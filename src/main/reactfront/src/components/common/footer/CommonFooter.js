@@ -1,4 +1,4 @@
-import useScript from "../../../hooks/useScript";
+
 
 
 function CommonFooter() {
