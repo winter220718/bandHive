@@ -15,7 +15,6 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Post from "./components/post/post";
 
 export default function App() {
-
     return (
         <>
             <Router>

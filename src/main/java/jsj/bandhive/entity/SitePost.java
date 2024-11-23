@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -41,4 +42,12 @@ public class SitePost {
 
     @Column(name = "PIC_GROUP_ID")
     private String picGroupId;
+
+    @Column(name = "CAUTION_ID")
+    private Long cautionId;
+
+    @OneToMany
+    @JoinColumn(name = "CAUTION_ID", referencedColumnName = "CAUTION_ID")
+    @OrderBy("cautionOrder ASC")
+    private List<Cautions> cautions;
 }

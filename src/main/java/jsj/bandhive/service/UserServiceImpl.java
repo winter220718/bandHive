@@ -4,7 +4,6 @@ import jsj.bandhive.entity.User;
 import jsj.bandhive.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+//    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public Long save(User user) {
@@ -25,7 +24,7 @@ public class UserServiceImpl implements UserService {
             throw e;
         }
         user.setJoinType("ROLE_CUSTOMER");
-        user.setMemberPassword(bCryptPasswordEncoder.encode(user.getMemberPassword()));
+//        user.setMemberPassword(bCryptPasswordEncoder.encode(user.getMemberPassword()));
 
         return userRepository.save(user).getMemberId();
     }

@@ -16,7 +16,7 @@ function CommonHeader() {
     })
 
     const logout = () => {
-        localStorage.removeItem('token');
+        // localStorage.removeItem('token');
         setIsLoggedIn(false);
     }
 

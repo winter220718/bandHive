@@ -72,13 +72,13 @@ function GetTopSites() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        // axios.get("/getTopSites")
-        //     .then(response => {
-        //         setData(response.data); // 데이터 상태 업데이트
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     });
+        axios.get("/getTopSites")
+            .then(response => {
+                setData(response.data); // 데이터 상태 업데이트
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }, []);
 
     return (
@@ -102,7 +102,6 @@ function GetTopSites() {
 }
 
 function Main() {
-
     // State to manage which FAQ item is active
     const [activeIndex, setActiveIndex] = useState(null);
 
@@ -120,8 +119,8 @@ function Main() {
             if (!selectHeader.classList.contains('scroll-up-sticky') &&
                 !selectHeader.classList.contains('sticky-top') &&
                 !selectHeader.classList.contains('fixed-top')) return;
-
-            window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
+            // selectBody.classList.add('scrolled');
+            // window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
         };
 
         window.addEventListener('scroll', toggleScrolled);
