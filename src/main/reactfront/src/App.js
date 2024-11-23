@@ -26,7 +26,7 @@ export default function App() {
                     <div className={styles.main}>
                         <Routes>
                             <Route path="/" element={<Main/>}/>
-                            <Route path="/post" element={<Post/>}/>
+                            <Route path="/post/:postId" element={<Post/>}/>
                         </Routes>
                     </div>
                     <div>

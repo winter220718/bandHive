@@ -21,13 +21,12 @@ public class JWTFilter  extends OncePerRequestFilter {
     public JWTFilter(JWTUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorization = request.getHeader("Authorization");
 
         if (authorization == null || !authorization.startsWith("Bearer ")) {
-            System.out.println("token null");
+            System.out.println(" token null");
             filterChain.doFilter(request, response); // 다음 필터로 넘겨준다
 
             return;

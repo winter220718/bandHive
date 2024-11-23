@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -58,8 +55,19 @@ public class HomeController {
     }
 
     @GetMapping("/post/{postId}")
-    public List<SiteRentalList> getPostRentalList(@PathVariable String postId) {
+    public Map<String, Object> getPostRentalList(@PathVariable String postId) {
+        System.out.println("여기!");
+        Map<String, Object> response = new HashMap<>();
 
-        return siteService.getSiteRentalList(postId);
+        SitePost st = siteService.getSitePost(postId);
+        List<SiteRentalList> stl = siteService.getSiteRentalList(postId);
+
+        response.put("sitePost", st);
+        response.put("siteRentalList", stl);
+
+        System.out.println("st = " + st);;
+        System.out.println("stl = " + stl);
+
+        return response;
     }
 }

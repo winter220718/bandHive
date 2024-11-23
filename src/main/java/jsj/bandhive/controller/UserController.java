@@ -3,7 +3,7 @@ package jsj.bandhive.controller;
 import jsj.bandhive.entity.Favorites;
 import jsj.bandhive.entity.User;
 import jsj.bandhive.service.FavoritesServiceImpl;
-import jsj.bandhive.service.UserServiceImpl;
+//import jsj.bandhive.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,37 +15,37 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserController {
 
-    private UserServiceImpl userService;
+//    private UserServiceImpl userService;
 
     private FavoritesServiceImpl favoritesService;
 
 
-    public UserController(UserServiceImpl userService, FavoritesServiceImpl favoritesService) {
-        this.userService = userService;
+    public UserController(/*serServiceImpl userService, */FavoritesServiceImpl favoritesService) {
+//        this.userService = userService;
         this.favoritesService = favoritesService;
     }
 
+//
+//    /*
+//    * 회원가입
+//    * */
+//    @PostMapping("/signup")
+//    public ResponseEntity<?> registerUser(@RequestBody User user) {
+//        Long memberId = userService.save(user);
+//        return new ResponseEntity<>(memberId, HttpStatus.OK);
+//    }
 
-    /*
-    * 회원가입
-    * */
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
-        Long memberId = userService.save(user);
-        return new ResponseEntity<>(memberId, HttpStatus.OK);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user, Model model) {
-
-        boolean isAuthenticated = userService.authenticate(user.getMemberEmail(), user.getMemberPassword());
-        if(isAuthenticated) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } else {
-            model.addAttribute("error", "login failed");
-            return new ResponseEntity<>(user, HttpStatus.NOT_ACCEPTABLE);
-        }
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody User user, Model model) {
+//
+//        boolean isAuthenticated = userService.authenticate(user.getMemberEmail(), user.getMemberPassword());
+//        if(isAuthenticated) {
+//            return new ResponseEntity<>(user, HttpStatus.OK);
+//        } else {
+//            model.addAttribute("error", "login failed");
+//            return new ResponseEntity<>(user, HttpStatus.NOT_ACCEPTABLE);
+//        }
+//    }
 
     /*
     * 찜 기능

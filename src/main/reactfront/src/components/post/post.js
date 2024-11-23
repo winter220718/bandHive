@@ -1,10 +1,30 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import axios from "axios";
+import {useParams} from "react-router";
+import siteExample from '../../assets/img/site/siteExample.jpg';
 
 const Post = () => {
+
+    const [siteInfo, setSiteInfo] = useState([]);
+    const [siteRentalInfo, setSiteRentalInfo] = useState([]);
+    const { postId } = useParams(); // url에서 동적으로 가져올때 씀
+
+    useEffect(() => {
+        axios.get(`/post/${postId}`)
+            .then(response => {
+                setSiteInfo(response.data.sitePost);
+                setSiteRentalInfo(response.data.siteRentalList);
+                console.log("siteInfo", siteInfo)
+                console.log("siteRentalInfo", siteRentalInfo)
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
+
     return (
-        <body>
+        <>
         <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
             <symbol id="check2" viewBox="0 0 16 16">
                 <path
@@ -33,7 +53,7 @@ const Post = () => {
                     data-bs-toggle="dropdown"
                     aria-label="Toggle theme (auto)">
                 <svg className="bi my-1 theme-icon-active" width="1em" height="1em">
-                    <use href="#circle-half"></use>
+                    <use xlinkHref="#circle-half"></use>
                 </svg>
                 <span className="visually-hidden" id="bd-theme-text">테마 변경</span>
             </button>
@@ -42,11 +62,11 @@ const Post = () => {
                     <button type="button" className="dropdown-item d-flex align-items-center"
                             data-bs-theme-value="light" aria-pressed="false">
                         <svg className="bi me-2 opacity-50" width="1em" height="1em">
-                            <use href="#sun-fill"></use>
+                            <use xlinkHref="#sun-fill"></use>
                         </svg>
                         라이트
                         <svg className="bi ms-auto d-none" width="1em" height="1em">
-                            <use href="#check2"></use>
+                            <use xlinkHref="#check2"></use>
                         </svg>
                     </button>
                 </li>
@@ -54,11 +74,11 @@ const Post = () => {
                     <button type="button" className="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
                             aria-pressed="false">
                         <svg className="bi me-2 opacity-50" width="1em" height="1em">
-                            <use href="#moon-stars-fill"></use>
+                            <use xlinkHref="#moon-stars-fill"></use>
                         </svg>
                         다크
                         <svg className="bi ms-auto d-none" width="1em" height="1em">
-                            <use href="#check2"></use>
+                            <use xlinkHref="#check2"></use>
                         </svg>
                     </button>
                 </li>
@@ -66,11 +86,11 @@ const Post = () => {
                     <button type="button" className="dropdown-item d-flex align-items-center active"
                             data-bs-theme-value="auto" aria-pressed="true">
                         <svg className="bi me-2 opacity-50" width="1em" height="1em">
-                            <use href="#circle-half"></use>
+                            <use xlinkHref="#circle-half"></use>
                         </svg>
                         시스템
                         <svg className="bi ms-auto d-none" width="1em" height="1em">
-                            <use href="#check2"></use>
+                            <use xlinkHref="#check2"></use>
                         </svg>
                     </button>
                 </li>
@@ -79,8 +99,8 @@ const Post = () => {
 
 
         <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
-            <symbol id="aperture" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2" viewBox="0 0 24 24">
+            <symbol id="aperture" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                    strokeWidth="2" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10"/>
                 <path
                     d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
@@ -90,266 +110,100 @@ const Post = () => {
                     d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
             </symbol>
             <symbol id="chevron-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
+                <path fillRule="evenodd"
                       d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
             </symbol>
         </svg>
 
-        <main className="container">
-            <div className="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
-                <div className="col-lg-6 px-0">
-                   <h1>사진</h1>
-                </div>
-            </div>
-            <div className="row g-5">
-                <div className="col-md-8">
+        {/*<main className="container">*/}
+        {/*    <div className="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">*/}
+        {/*        <div className="col-lg-6 px-0" style="object-fit: contain">*/}
+        {/*            <img src={siteExample}/>*/}
+        {/*        </div>*/}
+        {/*    </div>*/}
+        {/*    <div className="row g-5">*/}
+        {/*        <div className="col-md-8">*/}
 
-                    <article className="blog-post">
-                        <h2 className="display-5 link-body-emphasis mb-1">합주실명</h2>
-                        <p className="blog-post-meta">January 1, 2021 by Mark</p>
+        {/*            <article className="blog-post">*/}
+        {/*                <h2 className="display-5 link-body-emphasis mb-1">{siteInfo.site.siteName}</h2>*/}
+        {/*                <p className="blog-post-meta">{siteInfo.postDate}</p>*/}
 
-                        <p>합주실 설명~</p>
+        {/*                <p>{siteInfo.postTitle}</p>*/}
 
-                        <hr/>
-                        <p>This is some additional paragraph placeholder content. It has been written to fill the
-                            available space and show how a longer snippet of text affects the surrounding content. We'll
-                            repeat it often to keep the demonstration flowing, so be on the lookout for this exact same
-                            string of text.</p>
-                        <h2>Blockquotes</h2>
-                        <p>This is an example blockquote in action:</p>
-                        <blockquote className="blockquote">
-                            <p>Quoted text goes here.</p>
-                        </blockquote>
-                        <p>This is some additional paragraph placeholder content. It has been written to fill the
-                            available space and show how a longer snippet of text affects the surrounding content. We'll
-                            repeat it often to keep the demonstration flowing, so be on the lookout for this exact same
-                            string of text.</p>
-                        <h3>Example lists</h3>
-                        <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the
-                            other highly repetitive body text used throughout. This is an example unordered list:</p>
-                        <ul>
-                            <li>First list item</li>
-                            <li>Second list item with a longer description</li>
-                            <li>Third list item to close it out</li>
-                        </ul>
-                        <p>And this is an ordered list:</p>
-                        <ol>
-                            <li>First list item</li>
-                            <li>Second list item with a longer description</li>
-                            <li>Third list item to close it out</li>
-                        </ol>
-                        <p>And this is a definition list:</p>
-                        <dl>
-                            <dt>HyperText Markup Language (HTML)</dt>
-                            <dd>The language used to describe and define the content of a Web page</dd>
-                            <dt>Cascading Style Sheets (CSS)</dt>
-                            <dd>Used to describe the appearance of Web content</dd>
-                            <dt>JavaScript (JS)</dt>
-                            <dd>The programming language used to build advanced Web sites and applications</dd>
-                        </dl>
-                        <h2>Inline HTML elements</h2>
-                        <p>HTML defines a long list of available inline tags, a complete list of which can be found on
-                            the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">Mozilla Developer
-                                Network</a>.</p>
-                        <ul>
-                            <li><strong>To bold text</strong>, use <code
-                                className="language-plaintext highlighter-rouge">&lt;strong&gt;</code>.
-                            </li>
-                            <li><em>To italicize text</em>, use <code
-                                className="language-plaintext highlighter-rouge">&lt;em&gt;</code>.
-                            </li>
-                            <li>Abbreviations, like <abbr title="HyperText Markup Language">HTML</abbr> should use <code
-                                className="language-plaintext highlighter-rouge">&lt;abbr&gt;</code>, with an
-                                optional <code className="language-plaintext highlighter-rouge">title</code> attribute
-                                for the full phrase.
-                            </li>
-                            <li>Citations, like <cite>— Mark Otto</cite>, should use <code
-                                className="language-plaintext highlighter-rouge">&lt;cite&gt;</code>.
-                            </li>
-                            <li>
-                                <del>Deleted</del>
-                                text should use <code
-                                className="language-plaintext highlighter-rouge">&lt;del&gt;</code> and <ins>inserted</ins> text
-                                should use <code className="language-plaintext highlighter-rouge">&lt;ins&gt;</code>.
-                            </li>
-                            <li>Superscript <sup>text</sup> uses <code
-                                className="language-plaintext highlighter-rouge">&lt;sup&gt;</code> and
-                                subscript <sub>text</sub> uses <code
-                                    className="language-plaintext highlighter-rouge">&lt;sub&gt;</code>.
-                            </li>
-                        </ul>
-                        <p>Most of these elements are styled by browsers with few modifications on our part.</p>
-                        <h2>Heading</h2>
-                        <p>This is some additional paragraph placeholder content. It has been written to fill the
-                            available space and show how a longer snippet of text affects the surrounding content. We'll
-                            repeat it often to keep the demonstration flowing, so be on the lookout for this exact same
-                            string of text.</p>
-                        <h3>Sub-heading</h3>
-                        <p>This is some additional paragraph placeholder content. It has been written to fill the
-                            available space and show how a longer snippet of text affects the surrounding content. We'll
-                            repeat it often to keep the demonstration flowing, so be on the lookout for this exact same
-                            string of text.</p>
-                        <pre><code>Example code block</code></pre>
-                        <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the
-                            other highly repetitive body text used throughout.</p>
-                    </article>
+        {/*                <hr/>*/}
+        {/*                <p>{siteInfo.postContent}</p>*/}
+        {/*                <h2>Blockquotes</h2>*/}
+        {/*                <p>This is an example blockquote in action:</p>*/}
+        {/*                <blockquote className="blockquote">*/}
+        {/*                    <p>Quoted text goes here.</p>*/}
+        {/*                </blockquote>*/}
+        {/*                <p>This is some additional paragraph placeholder content. It has been written to fill the*/}
+        {/*                    available space and show how a longer snippet of text affects the surrounding content. We'll*/}
+        {/*                    repeat it often to keep the demonstration flowing, so be on the lookout for this exact same*/}
+        {/*                    string of text.</p>*/}
+        {/*            </article>*/}
 
-                    <article className="blog-post">
-                        <h2 className="display-5 link-body-emphasis mb-1">Another blog post</h2>
-                        <p className="blog-post-meta">December 23, 2020 by <a href="#">Jacob</a></p>
+        {/*        </div>*/}
 
-                        <p>This is some additional paragraph placeholder content. It has been written to fill the
-                            available space and show how a longer snippet of text affects the surrounding content. We'll
-                            repeat it often to keep the demonstration flowing, so be on the lookout for this exact same
-                            string of text.</p>
-                        <blockquote>
-                            <p>Longer quote goes here, maybe with some <strong>emphasized text</strong> in the middle of
-                                it.</p>
-                        </blockquote>
-                        <p>This is some additional paragraph placeholder content. It has been written to fill the
-                            available space and show how a longer snippet of text affects the surrounding content. We'll
-                            repeat it often to keep the demonstration flowing, so be on the lookout for this exact same
-                            string of text.</p>
-                        <h3>Example table</h3>
-                        <p>And don't forget about tables in these posts:</p>
-                        <table className="table">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Upvotes</th>
-                                <th>Downvotes</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Alice</td>
-                                <td>10</td>
-                                <td>11</td>
-                            </tr>
-                            <tr>
-                                <td>Bob</td>
-                                <td>4</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>Charlie</td>
-                                <td>7</td>
-                                <td>9</td>
-                            </tr>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <td>Totals</td>
-                                <td>21</td>
-                                <td>23</td>
-                            </tr>
-                            </tfoot>
-                        </table>
+        {/*        <div className="col-md-4">*/}
+        {/*            <div className="position-sticky" style={{top: '2rem'}}>*/}
+        {/*                <div className="p-4 mb-3 bg-body-tertiary rounded">*/}
+        {/*                    <h4 className="fst-italic">About</h4>*/}
+        {/*                    <p className="mb-0">Customize this section to tell your visitors a little bit about your*/}
+        {/*                        publication, writers, content, or something else entirely. Totally up to you.</p>*/}
+        {/*                </div>*/}
 
-                        <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the
-                            other highly repetitive body text used throughout.</p>
-                    </article>
+        {/*                <div>*/}
+        {/*                    <h4 className="fst-italic">합주실 선택</h4>*/}
+        {/*                    <ul className="list-unstyled">*/}
+        {/*                        <Rooms siteRentalInfo={siteRentalInfo}/>*/}
+        {/*                    </ul>*/}
+        {/*                </div>*/}
+        {/*            </div>*/}
+        {/*        </div>*/}
+        {/*    </div>*/}
 
-                    <article className="blog-post">
-                        <h2 className="display-5 link-body-emphasis mb-1">New feature</h2>
-                        <p className="blog-post-meta">December 14, 2020 by <a href="#">Chris</a></p>
-
-                        <p>This is some additional paragraph placeholder content. It has been written to fill the
-                            available space and show how a longer snippet of text affects the surrounding content. We'll
-                            repeat it often to keep the demonstration flowing, so be on the lookout for this exact same
-                            string of text.</p>
-                        <ul>
-                            <li>First list item</li>
-                            <li>Second list item with a longer description</li>
-                            <li>Third list item to close it out</li>
-                        </ul>
-                        <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the
-                            other highly repetitive body text used throughout.</p>
-                    </article>
-
-                    <nav className="blog-pagination" aria-label="Pagination">
-                        <a className="btn btn-outline-primary rounded-pill" href="#">Older</a>
-                        <a className="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Newer</a>
-                    </nav>
-
-                </div>
-
-                <div className="col-md-4">
-                    <div className="position-sticky" style={{top: '2rem'}}>
-                        <div className="p-4 mb-3 bg-body-tertiary rounded">
-                            <h4 className="fst-italic">About</h4>
-                            <p className="mb-0">Customize this section to tell your visitors a little bit about your
-                                publication, writers, content, or something else entirely. Totally up to you.</p>
-                        </div>
-
-                        <div>
-                            <h4 className="fst-italic">Recent posts</h4>
-                            <ul className="list-unstyled">
-                                <li>
-                                    <a className="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-                                       href="#">
-                                        <svg className="bd-placeholder-img" width="100%" height="96"
-                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                             preserveAspectRatio="xMidYMid slice" focusable="false">
-                                            <rect width="100%" height="100%" fill="#777"/>
-                                        </svg>
-                                        <div className="col-lg-8">
-                                            <h6 className="mb-0">Example blog post title</h6>
-                                            <small className="text-body-secondary">January 15, 2024</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-                                       href="#">
-                                        <svg className="bd-placeholder-img" width="100%" height="96"
-                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                             preserveAspectRatio="xMidYMid slice" focusable="false">
-                                            <rect width="100%" height="100%" fill="#777"/>
-                                        </svg>
-                                        <div className="col-lg-8">
-                                            <h6 className="mb-0">This is another blog post title</h6>
-                                            <small className="text-body-secondary">January 14, 2024</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-                                       href="#">
-                                        <svg className="bd-placeholder-img" width="100%" height="96"
-                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                             preserveAspectRatio="xMidYMid slice" focusable="false">
-                                            <rect width="100%" height="100%" fill="#777"/>
-                                        </svg>
-                                        <div className="col-lg-8">
-                                            <h6 className="mb-0">Longer blog post title: This one has multiple
-                                                lines!</h6>
-                                            <small className="text-body-secondary">January 13, 2024</small>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-
-        </main>
+        {/*</main>*/}
 
         <footer className="py-5 text-center text-body-secondary bg-body-tertiary">
             <p className="mb-0">
-                <a href="#">Back to top</a>
+                <a xlinkHref="#">Back to top</a>
             </p>
         </footer>
         <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
                 crossOrigin="anonymous"></script>
 
-        </body>
+            </>
     )
 
 };
+
+
+const Rooms = ({ siteRentalInfo }) => {
+    return (
+
+    <>
+        {siteRentalInfo.map(siteRentalInfo => (
+            <li key={siteRentalInfo.rentalId}>
+                <a className="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top">
+                    <svg className="bd-placeholder-img" width="100%" height="96"
+                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                         preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="#777"/>
+                    </svg>
+                    <div className="col-lg-8">
+                        <h6 className="mb-0">합주실명: {siteRentalInfo.roomName}</h6>
+                        <h6 className="mb-0">인원 제한: {siteRentalInfo.limit}</h6>
+                        <small className="text-body-secondary">{siteRentalInfo.dtlContent}</small>
+                    </div>
+                </a>
+            </li>
+        ))}
+        </>
+    );
+
+};
+
 
 export default Post;

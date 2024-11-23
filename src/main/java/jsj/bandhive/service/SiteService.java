@@ -8,6 +8,6 @@ import java.util.List;
 public interface SiteService {
 
     List<SitePost> getSitePosts();
-
+    SitePost getSitePost(String postId);
     List<SiteRentalList> getSiteRentalList(String postId);
 }

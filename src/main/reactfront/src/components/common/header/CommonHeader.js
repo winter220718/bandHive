@@ -11,8 +11,8 @@ function CommonHeader() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        setIsLoggedIn(!!token);
+        // const token = localStorage.getItem('token');
+        // setIsLoggedIn(!!token);
     })
 
     const logout = () => {
@@ -40,7 +40,7 @@ function CommonHeader() {
                         {/*<li><a href="services.html">Services</a></li>*/}
                         {/*<li><a href="pricing.html">Pricing</a></li>*/}
 
-                        <li><Link to="/post">합주실</Link></li>
+                        <li><Link to="/post/P07010001">합주실</Link></li>
                         <li className="dropdown">
                             <a href="#"><span>마이페이지</span>
                                 <i className="bi bi-chevron-down toggle-dropdown"></i></a>

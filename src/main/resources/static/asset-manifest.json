@@ -1,7 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.5e07368c.css",
-    "main.js": "/static/js/main.6219ea80.js",
+    "main.css": "/static/css/main.afadd8ee.css",
+    "main.js": "/static/js/main.c6b7c3bc.js",
+    "static/media/siteExample.jpg": "/static/media/siteExample.ee50e35ef13347bdf6cf.jpg",
     "static/media/world-dotted-map.jpg": "/static/media/world-dotted-map.5b664e532fc5ebc23629.jpg",
     "static/media/hero-img.png": "/static/media/hero-img.0344c2d8a66e7566c232.png",
     "static/media/cta-bg.jpg": "/static/media/cta-bg.240b860f19c4b1e12004.jpg",
@@ -20,11 +21,11 @@
     "static/media/fa-v4compatibility.ttf": "/static/media/fa-v4compatibility.0f6cb412603527bda691.ttf",
     "static/media/fa-v4compatibility.woff2": "/static/media/fa-v4compatibility.6cfec8414be20e2c3426.woff2",
     "index.html": "/index.html",
-    "main.5e07368c.css.map": "/static/css/main.5e07368c.css.map",
-    "main.6219ea80.js.map": "/static/js/main.6219ea80.js.map"
+    "main.afadd8ee.css.map": "/static/css/main.afadd8ee.css.map",
+    "main.c6b7c3bc.js.map": "/static/js/main.c6b7c3bc.js.map"
   },
   "entrypoints": [
-    "static/css/main.5e07368c.css",
-    "static/js/main.6219ea80.js"
+    "static/css/main.afadd8ee.css",
+    "static/js/main.c6b7c3bc.js"
   ]
 }

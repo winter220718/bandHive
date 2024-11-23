@@ -72,13 +72,13 @@ function GetTopSites() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get("/getTopSites")
-            .then(response => {
-                setData(response.data); // 데이터 상태 업데이트
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        // axios.get("/getTopSites")
+        //     .then(response => {
+        //         setData(response.data); // 데이터 상태 업데이트
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     });
     }, []);
 
     return (

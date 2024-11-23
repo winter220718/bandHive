@@ -25,6 +25,11 @@ public class SiteServiceImpl implements SiteService{
     }
 
     @Override
+    public SitePost getSitePost(String postId) {
+        return sitePostRepository.findAllByPostId(postId);
+    }
+
+    @Override
     public List<SiteRentalList> getSiteRentalList(String postId) {
         return siteRentalListRepository.findBySitePost_PostId(postId);
     }
