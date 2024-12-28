@@ -9,11 +9,9 @@ import heroImg from '../../assets/img/hero-img.png';
 import service2 from '../../assets/img/service-2.jpg';
 import ctaBg from '../../assets/img/cta-bg.jpg';
 import axios from "axios";
-
+import { useNavigate } from 'react-router-dom';
 import Carousel from 'react-bootstrap/Carousel';
 import CarouselImage from '../../assets/img/CarouselImage';
-
-import Styles from './main.module.scss';
 import features1 from '../../assets/img/features-1.jpg';
 import features2 from '../../assets/img/features-2.jpg';
 import features3 from '../../assets/img/features-3.jpg';
@@ -81,10 +79,15 @@ function GetTopSites() {
             });
     }, []);
 
+    const navigate = useNavigate();
+    const goToPostDtl = (postId) => {
+        navigate(`/post/${postId}`); // 이동할 경로
+    };
+
     return (
         <>
             {data.map(item => (
-                <div key={item.postId} className="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up"
+                <div key={item.postId} onClick={goToPostDtl(item.postId)} className="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up"
                      data-aos-delay="200">
                     <div className="card">
                         <div className="card-img">
@@ -329,7 +332,7 @@ function Main() {
                 <div className="container section-title aos-init aos-animate" data-aos="fade-up">
                     <span>자주 묻는 질문</span>
                     <h2>자주 묻는 질문</h2>
-                    <p>자주 묻는 질문들은 제가 이미 답을 해놨습니다.</p>
+                    <p>자주 묻는 질문들입니다.</p>
                 </div>
                 {/* End Section Title */}
 

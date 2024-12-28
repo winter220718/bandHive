@@ -14,7 +14,7 @@ const Post = () => {
     useEffect(() => {
         if (!isFetched.current) {
             isFetched.current = true;
-            axios.get('/post/P07010001')
+            axios.get(`/post/${postId}`)
                 .then((response) => {
                         setSiteRentalInfo(response.data.siteRentalList);
                         setSiteInfo(response.data.sitePost);
@@ -31,8 +31,6 @@ const Post = () => {
 
     return (
         <>
-            {/*{siteInfo.site.siteName}*/}
-            {/*{setSiteRentalInfo}*/}
             <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
                 <symbol id="check2" viewBox="0 0 16 16">
                     <path
@@ -152,9 +150,6 @@ const Post = () => {
                         <br/>
                         <br/>
                         <hr/>
-                        {/*<div id="map" style={{width:'500px', height:'400px', border:'black 1px solid'}}>*/}
-                        {/*    지도!*/}
-                        {/*</div>*/}
                         <KakaoMap/>
 
                     </div>
